@@ -10,4 +10,5 @@ Because the Larousse website doesn't supply an api to look up definitions :(
 * BeautifulSoup
 
 ### Possible improvements
+* Suggest words if the word is misspelled
 * Turn this into an actual pip package for ease of use
