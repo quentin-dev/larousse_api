@@ -4,8 +4,12 @@
 * `pip install larousse-api-sunbro`
 
 ### Usage
-`from larousse_api import larousse
-print(larousse.get_definitions("Fromage")`
+```
+from larousse_api import larousse
+
+# Print the array containing all defintions of "Fromage"
+print(larousse.get_definitions("Fromage")
+```
 
 ### Why ?
 Because the Larousse website doesn't supply an api to look up definitions :(
