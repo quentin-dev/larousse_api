@@ -4,7 +4,7 @@
 * `pip install larousse-api-sunbro`
 
 ### Usage
-```
+```python3
 from larousse_api import larousse
 
 # Print the array containing all defintions of "Fromage"
