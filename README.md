@@ -8,7 +8,7 @@
 from larousse_api import larousse
 
 # Print the array containing all defintions of "Fromage"
-print(larousse.get_definitions("Fromage")
+print(larousse.get_definitions("Fromage"))
 ```
 
 ### Why ?
