@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="larousse-api-sunbro",
-    version="0.0.3",
+    version="0.0.4",
     author="Quentin Barbarat",
     author_email="q.barbarat@gmail.com",
     long_description=long_description,
