@@ -15,6 +15,8 @@ print(larousse.get_definitions("Fromage"))
 Because the Larousse website doesn't supply an api to look up definitions :(
 
 ### How ?
+By making a request to the larousse website and parsing the result using the following modules. 
+
 * python3
 * requests
 * re
