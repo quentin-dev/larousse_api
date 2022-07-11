@@ -53,3 +53,15 @@ def get_homonyms(word):
         homonyms.append(unicodedata.normalize("NFKD", homonym.text))
 
     return homonyms
+
+def get_word_type(word):
+    """
+    :param word: The word whose type you are looking for
+    :return: A string containing the type of word
+    """
+
+    url = "https://www.larousse.fr/dictionnaires/francais/" + word.lower()
+    soup = BeautifulSoup(requests.get(url=url).text, 'html.parser')
+    word_type = unicodedata.normalize("NFKD", soup.select_one('.CatgramDefinition').text).strip()
+
+    return word_type
