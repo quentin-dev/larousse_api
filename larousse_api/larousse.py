@@ -53,3 +53,15 @@ def get_homonyms(word):
         homonyms.append(unicodedata.normalize("NFKD", homonym.text))
 
     return homonyms
+
+def get_word_origin(word):
+    """
+    :param word: The word whose origin you are looking for
+    :return: A string containing the origin of word
+    """
+
+    url = "https://www.larousse.fr/dictionnaires/francais/" + word.lower()
+    soup = BeautifulSoup(requests.get(url=url).text, 'html.parser')
+    word_origin = unicodedata.normalize("NFKD", soup.select_one('.OrigineDefinition').text).strip()
+
+    return word_origin
