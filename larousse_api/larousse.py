@@ -1,5 +1,4 @@
 import requests
-import re
 import unicodedata
 from bs4 import BeautifulSoup
 
@@ -9,9 +8,48 @@ def get_definitions(word):
     :param word: The word whose definition you are looking for
     :return: A list containing all the definitions of word
     """
+
+    definitions = []
+
     url = "https://www.larousse.fr/dictionnaires/francais/" + word.lower()
     soup = BeautifulSoup(requests.get(url=url).text, 'html.parser')
-    for ul in soup.find_all('ul'):
-        if ul.get('class') is not None and 'Definitions' in ul.get('class'):
-            return [unicodedata.normalize("NFKD", re.sub("<.*?>", "", str(li))) for li in ul.find_all('li')]
-    return []
+
+    for definition in soup.select('.Definitions .DivisionDefinition'):
+        definitions.append(unicodedata.normalize("NFKD", definition.text))
+    
+    return definitions
+
+def get_synonyms(word):
+    """
+    :param word: The word whose synonyms you are looking for
+    :return: A list containing all the synonyms of word
+    """
+
+    synonyms = []
+
+    url = "https://www.larousse.fr/dictionnaires/francais/" + word.lower()
+    soup = BeautifulSoup(requests.get(url=url).text, 'html.parser')
+
+    for synonym in soup.select('.Definitions .DivisionDefinition .Synonymes'):
+        synonyms += unicodedata.normalize("NFKD", synonym.text).split('-')
+    
+    for i in range(len(synonyms)):
+        synonyms[i] = synonyms[i].strip()
+
+    return synonyms
+
+def get_homonyms(word):
+    """
+    :param word: The word whose homonyms you are looking for
+    :return: A list containing all the homonyms of word
+    """
+
+    homonyms = []
+
+    url = "https://www.larousse.fr/dictionnaires/francais/" + word.lower()
+    soup = BeautifulSoup(requests.get(url=url).text, 'html.parser')
+
+    for homonym in soup.select('#homonyme .HomonymeDirects .Homonyme'):
+        homonyms.append(unicodedata.normalize("NFKD", homonym.text))
+
+    return homonyms
